@@ -51,6 +51,7 @@ const AugmentTable: React.FC<AugmentsTableProps> = ({ setUpdate }) => {
 				setAugmentData(data.Augments);
 
 				const myMoment = moment(data.Augments[0]?.updatedAt).subtract(3, "hours").format("LLLL");
+				console.log(myMoment);
 				setUpdate(myMoment);
 			},
 		}
