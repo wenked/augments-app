@@ -1,0 +1,16 @@
+query GetAugments {
+	Augments {
+		id
+		name
+		tier
+		top4
+		winrate
+		stage14
+		stage33
+		stage46
+		pickrate
+		placement
+		createdAt
+		updatedAt
+	}
+}
