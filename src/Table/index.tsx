@@ -20,19 +20,6 @@ import SearchBox from "../SearchBox";
 import { useGetAugmentsQuery, Augment } from "../graphql/generated";
 
 moment.locale("pt-br");
-/* export interface Augment {
-	id: number;
-	name: string;
-	tier: string;
-	pickrate: string;
-	placement: string;
-	top4: string;
-	winrate: string;
-	stage14: string;
-	stage33: string;
-	stage46: string;
-	updatedAt: string;
-} */
 
 interface AugmentsTableProps {
 	setUpdate: React.Dispatch<React.SetStateAction<string>>;
@@ -92,7 +79,7 @@ const AugmentTable: React.FC<AugmentsTableProps> = ({ setUpdate }) => {
 							<Td>{augment.tier}</Td>
 							<Td>{augment.pickrate}</Td>
 							<Td>{augment.placement}</Td>
-							<Td>{augment.top4}</Td>
+							<Td>{augment?.top4}</Td>
 							<Td>{augment.winrate}</Td>
 							<Td>{augment.stage14}</Td>
 							<Td>{augment.stage33}</Td>
