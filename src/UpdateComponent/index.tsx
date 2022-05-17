@@ -3,6 +3,7 @@ import { Stat, StatHelpText, Button } from "@chakra-ui/react";
 import { useQueryClient } from "react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useSendMessageQuery } from "../graphql/generated";
 
 interface UpdateProps {
 	date: string;
@@ -10,28 +11,20 @@ interface UpdateProps {
 
 const UpdateComponent: React.FC<UpdateProps> = ({ date }) => {
 	const queryClient = useQueryClient();
+	const [sendMessage, setSendMessage] = React.useState<boolean>(false);
 
-	const handleUpdateRequest = async () => {
-		try {
-			const data = await queryClient.fetchQuery("updateDb", async () => {
-				const response = await axios.post("http://127.0.0.1:8000/updatedb");
-				return response?.data;
-			});
-
-			toast.success(`${data?.message}`);
-			setTimeout(() => {
-				console.log("estou sendo executado");
-				queryClient.invalidateQueries("GetAugments");
-			}, 60000);
-		} catch (error) {
-			toast.error("Erro ao realizar update");
-			console.log(error);
-		}
-	};
+	const { data, isLoading, isError } = useSendMessageQuery(
+		{
+			endpoint: "http://localhost:4000/",
+			fetchParams: { headers: { "Content-Type": "application/json" } },
+		},
+		{},
+		{ enabled: sendMessage }
+	);
 
 	return (
 		<Stat width="200px">
-			<Button colorScheme="blue" marginBottom={1} onClick={handleUpdateRequest}>
+			<Button colorScheme="blue" marginBottom={1} onClick={() => setSendMessage(true)}>
 				Update DB
 			</Button>
 			{console.log(date)}

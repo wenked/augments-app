@@ -14,3 +14,9 @@ query GetAugments {
 		updatedAt
 	}
 }
+
+query sendMessage {
+	Send_to_queue {
+		id
+	}
+}

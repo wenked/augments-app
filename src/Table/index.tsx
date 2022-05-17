@@ -48,7 +48,7 @@ const AugmentTable: React.FC<AugmentsTableProps> = ({ setUpdate }) => {
 		{},
 		{
 			onSuccess: (data) => {
-				setAugmentData(data.Augments);
+				setAugmentData(data?.Augments);
 
 				const myMoment = moment(data.Augments[0]?.updatedAt).subtract(3, "hours").format("LLLL");
 				console.log(myMoment);
@@ -56,21 +56,6 @@ const AugmentTable: React.FC<AugmentsTableProps> = ({ setUpdate }) => {
 			},
 		}
 	);
-	/* const { data, isLoading, isError } = useQuery<Augment[], Error>(
-		"augments",
-		async (): Promise<Augment[]> => {
-			const response = await axios.get("http://127.0.0.1:8000/augments");
-			return response.data;
-		},
-		{
-			onSuccess: (data) => {
-				setAugmentData(data);
-
-				const myMoment = moment(data[0]?.updated_at).subtract(3, "hours").format("LLLL");
-				setUpdate(myMoment);
-			},
-		}
-	); */
 
 	if (isError) {
 		return <div>Failed to fetch data</div>;
